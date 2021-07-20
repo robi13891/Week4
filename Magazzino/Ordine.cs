@@ -8,42 +8,30 @@ namespace Magazzino
 {
     class Ordine
     {
-        public string idOrdine;
-        public string codiceCliente;
-        public decimal importoTotale;
-        public string listaProdotti;
-        public Stato statoOrdine;
+        public string idOrdine { get; set; }
+        public string codiceCliente { get; set; }
+        public decimal importoTotale { get; set; }
+        public string listaProdotti { get; set; }
+
+        public static Stato statoOrdine { get; private set; }
+
+        public DateTime Creato { get; }
 
         public Ordine()
         {
-
+            Creato = DateTime.Now;
+            statoOrdine = Stato.Nuovo;
         }
 
-        public Ordine AggiungiOrdine()
+        public void AggiornamentoStato()
         {
-            Ordine ordine = new Ordine();
-            Console.Write("Inserisci ID Ordine: ");
-            ordine.idOrdine = Console.ReadLine();
-            Console.Write("Inserisci Codice Cliente: ");
-            ordine.codiceCliente = Console.ReadLine();
-            Console.Write("Inserisci importo totale ordine: ");
-            ordine.importoTotale = decimal.Parse(Console.ReadLine());
-            Console.Write("Inserisci Lista prodotti acquistati: ");
-            ordine.listaProdotti = Console.ReadLine();
-            ordine.statoOrdine = Stato.Consegnato;
-            Console.WriteLine();
-            return ordine;
+            Console.WriteLine("Inserisci il numero corrispondente allo stato dell'ordine");
+            Console.WriteLine("1: Nuovo\n2: InLavorazione\n3:Pronto per la spedizione\n4:Spedito\n5:Consegnato");
+            int index = int.Parse(Console.ReadLine());
+            statoOrdine = (Stato)index;
         }
 
-        public void StampaOrdine(Ordine ordine)
-        {
-            Console.WriteLine("ID ordine: " + ordine.idOrdine);
-            Console.WriteLine("ID cliente: " + ordine.codiceCliente);
-            Console.WriteLine("Importo Ordine: " + ordine.importoTotale);
-            Console.WriteLine("Prodotti acquistati: " + ordine.listaProdotti);
-            Console.WriteLine("Stato dell'ordine: " + ordine.statoOrdine);
-            Console.WriteLine();
-        }
+
     }
 
     }
