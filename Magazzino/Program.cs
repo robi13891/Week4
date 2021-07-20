@@ -8,8 +8,13 @@ namespace Magazzino
         static void Main(string[] args)
         {
 
+           
+            //Ordine ordine = new Ordine();
+            //ordine.AggiornamentoStato();
+
             Menu.Start();
-            
+
+
         }
     }
 }

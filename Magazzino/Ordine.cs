@@ -8,41 +8,91 @@ namespace Magazzino
 {
     class Ordine
     {
-        public string idOrdine { get; set; }
-        public string codiceCliente { get; set; }
-        public decimal importoTotale { get; set; }
-        public string listaProdotti { get; set; }
+        public string IdOrdine 
+        { 
+            get; 
+            set; 
+        }
+        public string CodiceCliente 
+        { 
+            get; 
+            set; 
+        }
+        public decimal ImportoTotale 
+        { 
+            get; 
+            set; 
+        }
+        public string ListaProdotti 
+        { 
+            get; 
+            set; 
+        }
 
-        public static Stato statoOrdine { get; private set; }
+        public static Stato StatoOrdine 
+        { 
+            get; 
+            private set; 
+        }
 
-        public DateTime Creato { get; }
+        public DateTime Creato 
+        { 
+            get; 
+        }
 
-        public Ordine()
+        
+        public Ordine() // costruttore
         {
             Creato = DateTime.Now;
-            statoOrdine = Stato.Nuovo;
-        }
+            StatoOrdine = Stato.Nuovo;
+        }  
 
-        public void AggiornamentoStato()
+        public void AggiornamentoStato() 
         {
             Console.WriteLine("Inserisci il numero corrispondente allo stato dell'ordine");
-            Console.WriteLine("1: Nuovo\n2: InLavorazione\n3:Pronto per la spedizione\n4:Spedito\n5:Consegnato");
-            int index = int.Parse(Console.ReadLine());
-            statoOrdine = (Stato)index;
+            Console.WriteLine("1: Nuovo\n2: In Lavorazione\n3: Pronto per la spedizione\n4: Spedito\n5: Consegnato\n6: Reso\n");
+            bool isSuccessful = int.TryParse(Console.ReadLine(), out int choice);
+            while(!(isSuccessful && choice>=1 && choice <= 6))
+            {
+                Console.WriteLine("Inserimento non valido!\nInserisci lo stato dell'ordine:");
+                isSuccessful = int.TryParse(Console.ReadLine(), out choice);
+            }
+            
+            if(choice == (int)StatoOrdine + 1)
+            {
+                StatoOrdine = (Stato)choice;
+                Console.WriteLine("Stato aggiornato con successo!");
+            }
+            else if(choice == 2 && (int)StatoOrdine == 3)
+            {
+                StatoOrdine = (Stato)choice;
+                Console.WriteLine("Stato aggiornato con successo!");
+            }
+            else 
+            {
+                Console.WriteLine("Non è possibile cambiare lo stato in questo modo!");
+            }
+
+            StatoOrdine = (Stato)choice;
         }
 
+        public enum Stato // enum
+        {
+            Nuovo = 1 ,
+            InLavorazione = 2,
+            ProntoPerSpedizione = 3,
+            Spedito = 4,
+            Consegnato = 5,
+            Reso = 6
+        } 
 
     }
 
+    
+    
+
     }
 
-    public enum Stato
-    {
-        Nuovo,
-        InLavorazione,
-        ProntoPerSpedizione,
-        Spedito,
-        Consegnato
-    }
+    
 
 

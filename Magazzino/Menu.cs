@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Magazzino
 {
-    class Menu
+    static class Menu
     {
         public static void Start()
         {
@@ -36,8 +36,10 @@ namespace Magazzino
                         MagazzinoManager.StampaOrdine();
                         break;
                     case 3:
+                        Console.WriteLine("Inserisci id dell'ordine che vuoi modificare:");
+                        string idOrdine = Console.ReadLine();
+                        MagazzinoManager.CercaOrdine(idOrdine).AggiornamentoStato();
                         
-
                         break;
 
                 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Magazzino
 {
-    class MagazzinoManager
+    static class MagazzinoManager
     {
 
         public static List<Ordine> ordini = new List<Ordine>();
@@ -16,16 +16,16 @@ namespace Magazzino
             Ordine ordine = new Ordine();
 
             Console.Write("Inserisci ID Ordine: ");
-            ordine.idOrdine = Console.ReadLine();
+            ordine.IdOrdine = Console.ReadLine();
 
             Console.Write("Inserisci Codice Cliente: ");
-            ordine.codiceCliente = Console.ReadLine();
+            ordine.CodiceCliente = Console.ReadLine();
 
             Console.Write("Inserisci importo totale ordine: ");
-            ordine.importoTotale = decimal.Parse(Console.ReadLine());
+            ordine.ImportoTotale = decimal.Parse(Console.ReadLine());
 
             Console.Write("Inserisci Lista prodotti acquistati: ");
-            ordine.listaProdotti = Console.ReadLine();
+            ordine.ListaProdotti = Console.ReadLine();
 
             ordini.Add(ordine);
 
@@ -38,13 +38,32 @@ namespace Magazzino
             foreach (Ordine ordine in ordini)
             {
                 Console.WriteLine();
-                Console.WriteLine("ID ordine: " + ordine.idOrdine);
-                Console.WriteLine("ID cliente: " + ordine.codiceCliente);
-                Console.WriteLine("Importo Ordine: " + ordine.importoTotale);
-                Console.WriteLine("Prodotti acquistati: " + ordine.listaProdotti);
+                Console.WriteLine("ID ordine: " + ordine.IdOrdine);
+                Console.WriteLine("ID cliente: " + ordine.CodiceCliente);
+                Console.WriteLine("Importo Ordine: " + ordine.ImportoTotale);
+                Console.WriteLine("Prodotti acquistati: " + ordine.ListaProdotti);
                 Console.WriteLine("Data ordine: " + ordine.Creato);
+                Console.WriteLine("Stato ordine: " + ordine.StatoOrdine);
                 Console.WriteLine();
             }
+        }
+
+        public static Ordine CercaOrdine(string idOrdine)
+        {
+            Ordine ordineCercato = new Ordine();
+            foreach(Ordine ordine in ordini)
+            {
+                if (ordine.IdOrdine == idOrdine)
+                {
+                    ordineCercato = ordine;
+                    return ordineCercato;
+                    
+                }
+                                                                
+            }
+            return null;
+            
+            
         }
     }
 }
